@@ -1,35 +1,33 @@
-#include "stdio.h"
-#include "stdlib.h"
-#include "pthread.h"
-#include "sys/time.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/04 15:15:02 by revieira          #+#    #+#             */
+/*   Updated: 2023/05/04 17:15:59 by revieira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-pthread_t		tpid[2];
-pthread_mutex_t mutex;
-int				counter = 0;
+#include "../includes/philo.h"
 
-void	*routine(void *arg)
+void	init_data(char **argv, t_data *data)
 {
-	int	i;
-
-	(void)arg;
-	i = -1;
-	while (++i < 100000)
-	{
-		pthread_mutex_lock(&mutex);
-		counter++;
-		pthread_mutex_unlock(&mutex);
-	}
-	pthread_exit(NULL);
+	data = malloc(sizeof(t_data));
+	data->numbers_of_philosophers = (int)ft_atoill(argv[0]);
+	data->time_to_die = (int)ft_atoill(argv[1]);
+	data->time_to_eat = (int)ft_atoill(argv[2]);
+	data->time_to_sleep = (int)ft_atoill(argv[3]);
+	data->number_of_time_each_philosopher_must_eat = (int)ft_atoill(argv[4]);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	pthread_mutex_init(&mutex, NULL);
-	pthread_create(&(tpid[0]), NULL, &routine, NULL);
-	pthread_create(&(tpid[1]), NULL, &routine, NULL);
-	pthread_join(tpid[0], NULL);
-	pthread_join(tpid[1], NULL);
-	pthread_mutex_destroy(&mutex);
-	printf("%d\n", counter);
-	printf("Thread ends\n");
+	t_data	*data;
+
+	data = NULL;
+	if (!check_args(argc, argv))
+		return (1);
+	init_data(argv, data);
 }
