@@ -6,13 +6,13 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:14:15 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/04 17:28:42 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:43:27 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static int check_pos_numbers(char *number)
+static int	check_pos_numbers(char *number)
 {
 	int	i;
 

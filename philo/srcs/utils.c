@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:49:51 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/04 17:25:38 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:43:43 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ long long	ft_atoill(char *str)
 			sign = -1;
 	if (!ft_isdigit(str[i]))
 		return (0);
-	while(ft_isdigit(str[i]))
+	while (ft_isdigit(str[i]))
 	{
 		result = 10 * result + str[i] - '0';
 		i++;
