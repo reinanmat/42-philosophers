@@ -29,4 +29,10 @@ typedef struct s_data
 
 int			check_args(int argc, char **argv);
 
+// Utils
+int			ft_isdigit(char c);
+int			ft_isspace(char c);
+size_t		ft_amount_of_digits(char *str);
+long long	ft_atoill(char *str);
+
 #endif

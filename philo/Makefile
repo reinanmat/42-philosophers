@@ -5,6 +5,7 @@ OBJS_PATH = ./objs/
 
 FILES = main \
 		check_args \
+		utils
 
 SRCS = $(addprefix $(SRCS_PATH), $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix $(OBJS_PATH), $(addsuffix .o, $(FILES)))
