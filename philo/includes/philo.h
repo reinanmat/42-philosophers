@@ -26,4 +26,7 @@ typedef struct s_data
 	int	time_to_sleep;
 	int	number_of_time_each_philosopher_must_eat;
 }	t_data;
+
+int			check_args(int argc, char **argv);
+
 #endif

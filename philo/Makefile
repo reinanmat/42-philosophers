@@ -3,7 +3,8 @@ NAME = philo
 SRCS_PATH = ./srcs/
 OBJS_PATH = ./objs/
 
-FILES = main
+FILES = main \
+		check_args \
 
 SRCS = $(addprefix $(SRCS_PATH), $(addsuffix .c, $(FILES)))
 OBJS = $(addprefix $(OBJS_PATH), $(addsuffix .o, $(FILES)))
