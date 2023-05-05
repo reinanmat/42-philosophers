@@ -67,6 +67,15 @@ void	free_struct(t_philo *philo)
 		free(philo);
 }
 
+void	*routine(void *arg)
+{
+	t_philo *philo;
+
+	philo = (t_philo *)arg;
+	printf("Hello, philosophers num: %d\n", philo->id);
+	pthread_exit(NULL);
+}
+
 void	create_threads(t_philo *philo)
 {
 	int	i;
