@@ -92,8 +92,12 @@ void	create_threads(t_philo *philo)
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	t_philo	*philosophers;
 
 	if (!check_args(argc, argv))
 		return (1);
 	init_data(argc, argv, &data);
+	philosophers = init_philosophers(&data);
+	create_threads(philosophers);
+	free_struct(philosophers);
 }
