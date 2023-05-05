@@ -67,6 +67,17 @@ void	free_struct(t_philo *philo)
 		free(philo);
 }
 
+void	create_threads(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo->data->nbr_of_philosophers)
+	{
+		pthread_create(&philo[i].th, NULL, &routine, (void *)&philo[i]);
+		pthread_join(philo[i].th, NULL);
+		i++;
+	}
 }
 
 int	main(int argc, char **argv)
