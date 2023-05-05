@@ -52,6 +52,21 @@ t_philo	*init_philosophers(t_data *data)
 	return (philo);
 }
 
+void	free_struct(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	pthread_mutex_destroy(philo[i].on_print);
+	while (i < philo->data->nbr_of_philosophers)
+	{
+		pthread_mutex_destroy(&philo[i].fork);
+		i++;
+	}
+	if (philo)
+		free(philo);
+}
+
 }
 
 int	main(int argc, char **argv)
