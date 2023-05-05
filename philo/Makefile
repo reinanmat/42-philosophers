@@ -18,9 +18,11 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	cc $(CFLAGS) -o $(NAME) $(OBJS) -pthread
 
-$(OBJS_PATH)%.o: $(SRCS_PATH)%.c
-	mkdir -p $(OBJS_PATH)
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.c | $(OBJS_PATH)
 	cc $(CFLAGS) -I $(INCLUDES) -c $< -o $@
+
+$(OBJS_PATH):
+	mkdir -p $(OBJS_PATH)
 
 clean:
 	rm -rf $(OBJS_PATH)
