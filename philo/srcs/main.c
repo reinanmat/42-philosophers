@@ -161,9 +161,14 @@ void	*routine(void *arg)
 	t_philo *philo;
 
 	philo = (t_philo *)arg;
-	pthread_mutex_lock(philo->on_print);
-	printf("Hello, philosophers num: %d\n", philo->id);
-	pthread_mutex_unlock(philo->on_print);
+	if ((philo->id & 1) == 0)
+		usleep(500);
+	while (1)
+	{
+		eating(philo);
+		sleeping(philo);
+		thinking(philo);
+	}
 	return (NULL);
 }
 
