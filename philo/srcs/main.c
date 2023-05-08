@@ -111,11 +111,18 @@ void	*routine(void *arg)
 void	create_threads(t_philo *philo)
 {
 	int	i;
+	int	limit;
 
 	i = 0;
-	while (i < philo->data->nbr_of_philosophers)
+	limit = philo->data->nbr_of_philosophers;
+	while (i < limit)
 	{
 		pthread_create(&philo[i].th, NULL, &routine, (void *)&philo[i]);
+		i++;
+	}
+	i = 0;
+	while (i < limit)
+	{
 		pthread_join(philo[i].th, NULL);
 		i++;
 	}
