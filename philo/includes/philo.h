@@ -6,13 +6,14 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:30:00 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/05 16:47:19 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/08 12:46:23 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
