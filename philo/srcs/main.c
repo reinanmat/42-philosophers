@@ -172,13 +172,35 @@ void	*routine(void *arg)
 	return (NULL);
 }
 
+void	*monitoring(void *arg)
+{
+	int		i;
+	t_philo	*philo;
+
+	i = 0;
+	philo = (t_philo *)arg;
+	while (1)
+	{
+		if (philo->last_meal && get_time() - philo->last_meal > philo->data->time_to_die)
+		{
+			pthread_mutex_lock(philo->on_print);
+			printf("%ld %d died\n", get_time(), philo->id);
+			pthread_mutex_unlock(philo->on_print);
+			exit(1);
+		}
+		i = (i + 1 + philo->data->nbr_of_philosophers) % philo->data->nbr_of_philosophers;
+	}
+}
+
 void	create_threads(t_philo *philo)
 {
-	int	i;
-	int	limit;
+	int			i;
+	int			limit;
+	pthread_t	th_monitoring;
 
 	i = 0;
 	limit = philo->data->nbr_of_philosophers;
+	pthread_create(&th_monitoring, NULL, &monitoring, (void *)philo);
 	while (i < limit)
 	{
 		pthread_create(&philo[i].th, NULL, &routine, (void *)&philo[i]);
@@ -190,8 +212,8 @@ void	create_threads(t_philo *philo)
 		pthread_join(philo[i].th, NULL);
 		i++;
 	}
+	pthread_join(th_monitoring, NULL);
 }
-
 int	main(int argc, char **argv)
 {
 	t_data	data;
