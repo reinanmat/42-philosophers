@@ -57,17 +57,18 @@ t_philo	*init_philosophers(t_data *data)
 	int				i;
 	int				num_philos;
 	t_philo			*philo;
-	pthread_mutex_t	on_print;
+	pthread_mutex_t	*on_print;
 	
 	i = 0;
 	num_philos = data->nbr_of_philosophers;
-	pthread_mutex_init(&on_print, NULL);
 	philo = malloc(sizeof(t_philo) * num_philos);
+	on_print = malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(on_print, NULL);
 	while (i < num_philos)
 	{
 		philo[i].id = i + 1;
 		philo[i].data = data;
-		philo[i].on_print = &on_print;
+		philo[i].on_print = on_print;
 		pthread_mutex_init(&philo[i].fork, NULL);
 		i++;
 	}
