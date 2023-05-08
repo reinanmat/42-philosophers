@@ -102,8 +102,10 @@ void	*routine(void *arg)
 	t_philo *philo;
 
 	philo = (t_philo *)arg;
+	pthread_mutex_lock(philo->on_print);
 	printf("Hello, philosophers num: %d\n", philo->id);
-	pthread_exit(NULL);
+	pthread_mutex_unlock(philo->on_print);
+	return (NULL);
 }
 
 void	create_threads(t_philo *philo)
