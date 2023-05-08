@@ -123,6 +123,39 @@ void	free_struct(t_philo *philo)
 		free(philo);
 }
 
+void	eating(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->fork);
+	pthread_mutex_lock(philo->on_print);
+	printf("%ld %d has taken a fork\n", get_time(), philo->id);
+	pthread_mutex_unlock(philo->on_print);
+	pthread_mutex_lock(philo->fork_left);
+	pthread_mutex_lock(philo->on_print);
+	printf("%ld %d has taken a fork\n", get_time(), philo->id);
+	printf("%ld %d is eating\n", get_time(), philo->id);
+	philo->last_meal = get_time();
+	pthread_mutex_unlock(philo->on_print);
+	usleep(philo->data->time_to_eat);
+	pthread_mutex_unlock(&philo->fork);
+	pthread_mutex_unlock(philo->fork_left);
+}
+
+void	sleeping(t_philo *philo)
+{
+	pthread_mutex_lock(philo->on_print);
+	printf("%ld %d is sleeping\n", get_time(), philo->id);
+	pthread_mutex_unlock(philo->on_print);
+	usleep(philo->data->time_to_sleep);
+}
+
+void	thinking(t_philo *philo)
+{
+	pthread_mutex_lock(philo->on_print);
+	printf("%ld %d is thinking\n", get_time(), philo->id);
+	pthread_mutex_unlock(philo->on_print);
+	usleep(500);
+}
+
 void	*routine(void *arg)
 {
 	t_philo *philo;
