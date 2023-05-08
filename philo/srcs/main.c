@@ -94,6 +94,7 @@ t_philo	*init_philosophers(t_data *data)
 		philo[i].id = i + 1;
 		philo[i].data = data;
 		philo[i].on_print = on_print;
+		philo[i].last_meal = 0;
 		pthread_mutex_init(&philo[i].fork, NULL);
 		i++;
 	}
