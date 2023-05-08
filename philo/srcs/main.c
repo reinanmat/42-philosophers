@@ -87,6 +87,7 @@ void	free_struct(t_philo *philo)
 
 	i = 0;
 	pthread_mutex_destroy(philo[i].on_print);
+	free(philo[i].on_print);
 	while (i < philo->data->nbr_of_philosophers)
 	{
 		pthread_mutex_destroy(&philo[i].fork);
