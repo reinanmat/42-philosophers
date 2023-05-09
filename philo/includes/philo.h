@@ -48,6 +48,8 @@ typedef struct s_philo
 
 int			check_args(int argc, char **argv);
 
+//Create_threads
+void		create_threads(t_philo *philo, t_data *info);
 
 //Print Actions
 void		print_actions(t_philo *philo, char *action);
