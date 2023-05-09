@@ -43,6 +43,9 @@ typedef struct s_philo
 int			check_args(int argc, char **argv);
 
 
+//Threads
+void		*routine(void *arg);
+
 //Get_time
 time_t		get_time(void);
 time_t		get_time_stamp(t_philo *philo);
