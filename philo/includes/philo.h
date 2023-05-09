@@ -45,6 +45,7 @@ int			check_args(int argc, char **argv);
 
 //Threads
 void		*routine(void *arg);
+void		*monitoring(void *arg);
 
 //Get_time
 time_t		get_time(void);
