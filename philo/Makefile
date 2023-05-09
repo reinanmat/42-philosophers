@@ -5,6 +5,7 @@ OBJS_PATH = ./objs/
 
 FILES = main \
 		check_args \
+		create_threads \
 		utils
 
 SRCS = $(addprefix $(SRCS_PATH), $(addsuffix .c, $(FILES)))
