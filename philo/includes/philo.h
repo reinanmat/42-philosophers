@@ -19,6 +19,12 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+# define TAKEN_FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define DIED "died"
+
 typedef struct s_data
 {
 	time_t	time_init;
