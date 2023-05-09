@@ -9,6 +9,7 @@ FILES = main \
 		print_actions \
 		routine \
 		monitoring \
+		get_time \
 		utils
 
 SRCS = $(addprefix $(SRCS_PATH), $(addsuffix .c, $(FILES)))
