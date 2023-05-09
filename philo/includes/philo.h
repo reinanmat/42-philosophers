@@ -38,8 +38,8 @@ typedef struct s_data
 typedef struct s_philo
 {
 	int				id;
-	int				last_meal;
 	t_data			*data;
+	time_t			last_meal;
 	pthread_t		th;
 	pthread_mutex_t	fork;
 	pthread_mutex_t *fork_left;
