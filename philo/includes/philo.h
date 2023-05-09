@@ -49,6 +49,9 @@ typedef struct s_philo
 int			check_args(int argc, char **argv);
 
 
+//Print Actions
+void		print_actions(t_philo *philo, char *action);
+
 //Threads
 void		*routine(void *arg);
 void		*monitoring(void *arg);
