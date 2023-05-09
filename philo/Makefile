@@ -8,6 +8,7 @@ FILES = main \
 		create_threads \
 		print_actions \
 		routine \
+		monitoring \
 		utils
 
 SRCS = $(addprefix $(SRCS_PATH), $(addsuffix .c, $(FILES)))
