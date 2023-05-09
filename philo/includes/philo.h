@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:30:00 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/08 17:52:40 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:33:12 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ typedef struct s_philo
 }	t_philo;
 
 int			check_args(int argc, char **argv);
+
+
+//Get_time
+time_t		get_time(void);
+time_t		get_time_stamp(t_philo *philo);
 
 // Utils
 int			ft_isdigit(char c);
