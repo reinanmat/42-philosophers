@@ -100,28 +100,6 @@ void	free_struct(t_philo *philo)
 }
 }
 
-void	create_threads(t_philo *philo)
-{
-	int			i;
-	int			limit;
-	pthread_t	th_monitoring;
-
-	i = 0;
-	limit = philo->data->nbr_of_philosophers;
-	pthread_create(&th_monitoring, NULL, &monitoring, (void *)philo);
-	while (i < limit)
-	{
-		pthread_create(&philo[i].th, NULL, &routine, (void *)&philo[i]);
-		i++;
-	}
-	i = 0;
-	while (i < limit)
-	{
-		pthread_join(philo[i].th, NULL);
-		i++;
-	}
-	pthread_join(th_monitoring, NULL);
-}
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -131,6 +109,6 @@ int	main(int argc, char **argv)
 		return (1);
 	init_data(argc, argv, &data);
 	philosophers = init_philosophers(&data);
-	create_threads(philosophers);
+	create_threads(philosophers, &data);
 	free_struct(philosophers);
 }
