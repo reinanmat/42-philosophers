@@ -54,14 +54,14 @@ int			check_args(int argc, char **argv);
 void		create_threads(t_philo *philo, t_data *info);
 
 //Print Actions
-void		print_actions(t_philo *philo, char *action);
+void		print_action(t_philo *philo, char *action);
 
 //Threads
 void		*routine(void *arg);
 
 //Get_time
 time_t		get_time(void);
-time_t		get_time_stamp(t_philo *philo);
+time_t		get_timestamp(t_philo *philo);
 
 // Utils
 int			ft_isdigit(char c);

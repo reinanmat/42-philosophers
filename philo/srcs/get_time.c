@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:43:58 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/09 15:34:22 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:47:14 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ time_t	get_time(void)
 	return (seconds_to_ms(tv.tv_sec) + miliseconds_to_ms(tv.tv_usec));
 }
 
-time_t	get_time_stamp(t_philo *philo)
+time_t	get_timestamp(t_philo *philo)
 {
 	return (get_time() - philo->data->time_init);
 }
