@@ -8,7 +8,6 @@ FILES = main \
 		create_threads \
 		print_actions \
 		routine \
-		monitoring \
 		get_time \
 		utils
 

@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:30:00 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/09 15:33:12 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:04:43 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void		print_actions(t_philo *philo, char *action);
 
 //Threads
 void		*routine(void *arg);
-void		*monitoring(void *arg);
 
 //Get_time
 time_t		get_time(void);
