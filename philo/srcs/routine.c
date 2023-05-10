@@ -26,8 +26,8 @@ static void	to_eat(t_philo *philo)
 	pthread_mutex_lock(philo->fork_left);
 	print_action(philo, TAKEN_FORK);
 	print_action(philo, EAT);
+	usleep(philo->data->time_to_eat * 1000);
 	philo->last_meal = get_time();
-	usleep(philo->data->time_to_eat);
 	pthread_mutex_unlock(&philo->fork);
 	pthread_mutex_unlock(philo->fork_left);
 }
