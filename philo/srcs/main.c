@@ -80,9 +80,9 @@ void	free_struct(t_philo *philo)
 int	only_one_philo(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->fork);
-	print_actions(philo, TAKEN_FORK);
+	print_action(philo, TAKEN_FORK);
 	usleep(philo->data->time_to_die * 1000);
-	print_actions(philo, DIED);
+	print_action(philo, DIED);
 	pthread_mutex_unlock(&philo->fork);
 	free_struct(philo);
 	return (0);

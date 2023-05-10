@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:18:56 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/09 16:23:55 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:14:34 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void	to_eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->fork);
-	print_actions(philo, TAKEN_FORK);
+	print_action(philo, TAKEN_FORK);
 	pthread_mutex_lock(philo->fork_left);
-	print_actions(philo, TAKEN_FORK);
-	print_actions(philo, EAT);
+	print_action(philo, TAKEN_FORK);
+	print_action(philo, EAT);
 	philo->last_meal = get_time();
 	usleep(philo->data->time_to_eat);
 	pthread_mutex_unlock(&philo->fork);
@@ -27,13 +27,13 @@ static void	to_eat(t_philo *philo)
 
 static void	to_sleep(t_philo *philo)
 {
-	print_actions(philo, SLEEP);
+	print_action(philo, SLEEP);
 	usleep(philo->data->time_to_sleep * 1000);
 }
 
 static void	to_think(t_philo *philo)
 {
-	print_actions(philo, THINK);
+	print_action(philo, THINK);
 	usleep(300);
 }
 
