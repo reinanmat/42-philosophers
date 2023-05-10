@@ -38,7 +38,6 @@ typedef struct s_data
 typedef struct s_philo
 {
 	int				id;
-	t_data			*data;
 	int				*stop;
 	time_t			last_meal;
 	pthread_t		th;
@@ -46,6 +45,7 @@ typedef struct s_philo
 	pthread_mutex_t *fork_left;
 	pthread_mutex_t	*on_print;
 	pthread_mutex_t	*mstop;
+	t_data			*data;
 }	t_philo;
 
 int			check_args(int argc, char **argv);
