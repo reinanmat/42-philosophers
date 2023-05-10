@@ -25,34 +25,6 @@ void	init_data(int argc, char **argv, t_data *data)
 		data->meal_numbers = -1;
 }
 
-/* t_philo	*init_philosophers(t_data *data) */
-/* { */
-/* 	int				i; */
-/* 	int				num_philos; */
-/* 	t_philo			*philo; */
-	
-/* 	i = 0; */
-/* 	num_philos = data->nbr_of_philosophers; */
-/* 	philo = malloc(sizeof(t_philo) * num_philos); */
-/* 	philo[0].on_print = malloc(sizeof(pthread_mutex_t)); */
-/* 	pthread_mutex_init(philo[0].on_print, NULL); */
-/* 	while (i < num_philos) */
-/* 	{ */
-/* 		philo[i].id = i + 1; */
-/* 		philo[i].data = data; */
-/* 		pthread_mutex_init(&philo[i].fork, NULL); */
-/* 		i++; */
-/* 	} */
-/* 	i = 0; */
-/* 	while (i < num_philos) */
-/* 	{ */
-/* 		 philo[i].fork_left = &philo[(i + 1 + num_philos) % num_philos].fork; */
-/* 		 philo[i].on_print = philo[0].on_print; */
-/* 		 i++; */
-/* 	} */
-/* 	return (philo); */
-/* } */
-
 t_philo	*init_philosophers(t_data *data)
 {
 	int				i;
