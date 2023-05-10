@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:18:56 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/10 15:14:34 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:33:55 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	to_eat(t_philo *philo)
 	pthread_mutex_lock(philo->mstop);
 	if (philo->stop == 0)
 	{
-		return ;
 		pthread_mutex_unlock(philo->mstop);
+		return ;
 	}
 	pthread_mutex_unlock(philo->mstop);
 	pthread_mutex_lock(&philo->fork);
@@ -37,8 +37,8 @@ static void	to_sleep(t_philo *philo)
 	pthread_mutex_lock(philo->mstop);
 	if (philo->stop == 0)
 	{
-		return ;
 		pthread_mutex_unlock(philo->mstop);
+		return ;
 	}
 	pthread_mutex_unlock(philo->mstop);
 	print_action(philo, SLEEP);
@@ -50,8 +50,8 @@ static void	to_think(t_philo *philo)
 	pthread_mutex_lock(philo->mstop);
 	if (philo->stop == 0)
 	{
-		return ;
 		pthread_mutex_unlock(philo->mstop);
+		return ;
 	}
 	pthread_mutex_unlock(philo->mstop);
 	print_action(philo, THINK);
