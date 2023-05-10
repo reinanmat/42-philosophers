@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:45:02 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/09 15:10:00 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:17:39 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	create_threads(t_philo *philo, t_data *data)
 	i = 0;
 	while (i < data->nbr_of_philosophers)
 	{
+		philo[i].last_meal = get_time();
 		pthread_create(&philo[i].th, NULL, &routine, (void *)&philo[i]);
 		i++;
 	}
