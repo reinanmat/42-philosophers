@@ -6,12 +6,11 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:15:02 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/10 13:04:32 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:49:36 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
 void	init_data(int argc, char **argv, t_data *data)
 {
 	data->time_init = get_time();
@@ -67,8 +66,21 @@ void	free_struct(t_philo *philo)
 	int	i;
 
 	i = 0;
+	if (philo->data->nbr_of_philosophers == 1)
+	{
+		pthread_mutex_destroy(philo[i].on_print);
+		pthread_mutex_destroy(philo[i].mstop);
+		free(philo[i].on_print);
+		free(philo[i].mstop);
+		free(philo[i].stop);
+		free(philo);
+		return ;
+	}
 	pthread_mutex_destroy(philo[i].on_print);
+	pthread_mutex_destroy(philo[i].mstop);
 	free(philo[i].on_print);
+	free(philo[i].mstop);
+	free(philo[i].stop);
 	while (i < philo->data->nbr_of_philosophers)
 	{
 		pthread_mutex_destroy(&philo[i].fork);
