@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:45:02 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/11 16:32:50 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:27:52 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ static int	monitoring(t_philo *philo, t_data *data)
 		while (i < data->nbr_of_philosophers)
 		{
 			current_time = get_time();	
+			pthread_mutex_lock(philo[i].on_print);
 			last_meal = philo[i].last_meal;
-			if (current_time - philo[i].last_meal >= data->time_to_die)
+			pthread_mutex_unlock(philo[i].on_print);
+			if (current_time - last_meal >= data->time_to_die)
 			{
 				pthread_mutex_lock(philo[i].mstop);
 				philo[i].data->to_stop = 1;

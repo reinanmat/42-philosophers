@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:18:56 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/11 16:54:33 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:32:50 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,38 @@ static int	exec_action(t_philo *philo, char *action)
 	return (0);
 }
 
+static void	taken_fork(t_philo *philo, int fork_num)
+{
+	if (fork_num == 1)
+	{
+		if ((philo->id & 1) == 0)
+			pthread_mutex_lock(&philo->fork);
+		else
+			pthread_mutex_lock(philo->fork_left);
+	}
+	else
+	{
+		if ((philo->id & 1) == 0)
+			pthread_mutex_lock(philo->fork_left);
+		else
+			pthread_mutex_lock(&philo->fork);
+	}
+}
+
+static void	return_forks(t_philo *philo)
+{
+	if ((philo->id & 1) == 0)
+	{
+		pthread_mutex_unlock(&philo->fork);
+		pthread_mutex_unlock(philo->fork_left);
+	}
+	else
+	{
+		pthread_mutex_unlock(philo->fork_left);
+		pthread_mutex_unlock(&philo->fork);
+	}
+}
+
 void	*routine(void *arg)
 {
 	t_philo *philo;
@@ -72,13 +104,12 @@ void	*routine(void *arg)
 		usleep(500);
 	while (philo->status)
 	{
-		pthread_mutex_lock(&philo->fork);
+		taken_fork(philo, 1);
 		philo->status = exec_action(philo, TAKEN_FORK);
-		pthread_mutex_lock(philo->fork_left);
+		taken_fork(philo, 2);
 		philo->status = exec_action(philo, TAKEN_FORK);
 		philo->status = exec_action(philo, EAT);
-		pthread_mutex_unlock(&philo->fork);
-		pthread_mutex_unlock(philo->fork_left);
+		return_forks(philo);
 		philo->status = to_sleep(philo);
 		philo->status = to_think(philo);
 	}
