@@ -33,12 +33,12 @@ typedef struct s_data
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		meal_numbers;
+	int		to_stop;
 }	t_data;
 
 typedef struct s_philo
 {
 	int				id;
-	int				*stop;
 	time_t			last_meal;
 	pthread_t		th;
 	pthread_mutex_t	fork;

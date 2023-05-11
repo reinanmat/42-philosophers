@@ -6,11 +6,12 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:15:02 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/10 18:49:36 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:22:10 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
 void	init_data(int argc, char **argv, t_data *data)
 {
 	data->time_init = get_time();
@@ -18,6 +19,7 @@ void	init_data(int argc, char **argv, t_data *data)
 	data->time_to_die = (int)ft_atoill(argv[2]);
 	data->time_to_eat = (int)ft_atoill(argv[3]);
 	data->time_to_sleep = (int)ft_atoill(argv[4]);
+	data->to_stop = 0;
 	if (argc == 6)
 		data->meal_numbers = (int)ft_atoill(argv[5]);
 	else
@@ -28,7 +30,6 @@ t_philo	*init_philosophers(t_data *data)
 {
 	int				i;
 	int				num_philos;
-	int				*stop_value;
 	t_philo			*philo;
 	pthread_mutex_t	*on_print;
 	pthread_mutex_t	*mstop;
@@ -38,15 +39,12 @@ t_philo	*init_philosophers(t_data *data)
 	philo = malloc(sizeof(t_philo) * num_philos);
 	mstop = malloc(sizeof(pthread_mutex_t));
 	on_print = malloc(sizeof(pthread_mutex_t));
-	stop_value = malloc(sizeof(int));
-	*stop_value = 1;
 	pthread_mutex_init(mstop, NULL);
 	pthread_mutex_init(on_print, NULL);
 	while (i < num_philos)
 	{
 		philo[i].id = i + 1;
 		philo[i].data = data;
-		philo[i].stop = stop_value;
 		philo[i].mstop = mstop;
 		philo[i].on_print = on_print;
 		pthread_mutex_init(&philo[i].fork, NULL);
@@ -72,7 +70,6 @@ void	free_struct(t_philo *philo)
 		pthread_mutex_destroy(philo[i].mstop);
 		free(philo[i].on_print);
 		free(philo[i].mstop);
-		free(philo[i].stop);
 		free(philo);
 		return ;
 	}
@@ -80,7 +77,6 @@ void	free_struct(t_philo *philo)
 	pthread_mutex_destroy(philo[i].mstop);
 	free(philo[i].on_print);
 	free(philo[i].mstop);
-	free(philo[i].stop);
 	while (i < philo->data->nbr_of_philosophers)
 	{
 		pthread_mutex_destroy(&philo[i].fork);
