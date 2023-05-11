@@ -45,6 +45,8 @@ t_philo	*init_philosophers(t_data *data)
 	{
 		philo[i].id = i + 1;
 		philo[i].data = data;
+		philo[i].meals = 0;
+		philo[i].status = 1;
 		philo[i].mstop = mstop;
 		philo[i].on_print = on_print;
 		pthread_mutex_init(&philo[i].fork, NULL);
