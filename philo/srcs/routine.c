@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:18:56 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/11 18:32:50 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:47:35 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	to_sleep(t_philo *philo)
 {
 	pthread_mutex_lock(philo->mstop);
-	if (philo->data->to_stop == 1)
+	if (philo->data->to_stop == 1 || philo->status == 0)
 	{
 		pthread_mutex_unlock(philo->mstop);
 		return (0);
@@ -29,7 +29,7 @@ static int	to_sleep(t_philo *philo)
 static int	to_think(t_philo *philo)
 {
 	pthread_mutex_lock(philo->mstop);
-	if (philo->data->to_stop == 1)
+	if (philo->data->to_stop == 1 || philo->status == 0)
 	{
 		pthread_mutex_unlock(philo->mstop);
 		return (0);
@@ -57,10 +57,12 @@ static int	exec_action(t_philo *philo, char *action)
 		philo->last_meal = get_time();
 		pthread_mutex_unlock(philo->on_print);
 		philo->meals++;
+		if (philo->meals == philo->data->meal_numbers)
+			return (0);
 	}
 	else
 		print_action(philo, action);
-	return (0);
+	return (1);
 }
 
 static void	taken_fork(t_philo *philo, int fork_num)

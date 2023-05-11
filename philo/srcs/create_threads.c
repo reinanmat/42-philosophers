@@ -41,7 +41,7 @@ static int	monitoring(t_philo *philo, t_data *data)
 			pthread_mutex_lock(philo[i].on_print);
 			last_meal = philo[i].last_meal;
 			pthread_mutex_unlock(philo[i].on_print);
-			if (current_time - last_meal >= data->time_to_die)
+			if (philo[i].status && current_time - last_meal >= data->time_to_die)
 			{
 				pthread_mutex_lock(philo[i].mstop);
 				philo[i].data->to_stop = 1;
@@ -51,7 +51,10 @@ static int	monitoring(t_philo *philo, t_data *data)
 			}
 			i++;
 		}
+		if (get_remaining_philosophers(philo) == 0)
+			break ;
 	}
+	return (0);
 }
 
 void	create_threads(t_philo *philo, t_data *data)
