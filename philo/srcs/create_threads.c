@@ -6,11 +6,25 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:45:02 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/11 17:27:52 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:57:22 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+int	get_remaining_philosophers(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo->data->nbr_of_philosophers)
+	{
+		if (philo->status)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 static int	monitoring(t_philo *philo, t_data *data)
 {
