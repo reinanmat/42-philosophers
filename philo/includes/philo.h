@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:30:00 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/10 13:04:43 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:35:09 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int			ft_isdigit(char c);
 int			ft_isspace(char c);
 size_t		ft_amount_of_digits(char *str);
 long long	ft_atoill(char *str);
+int			ft_strcmp(const char *s1, const char *s2);
 
 #endif
