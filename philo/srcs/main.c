@@ -75,6 +75,12 @@ void	free_struct(t_philo *philo)
 		free(philo);
 		return ;
 	}
+	while (i < philo->data->nbr_of_philosophers)
+	{
+		pthread_join(philo[i].th, NULL);
+		i++;
+	}
+	i = 0;
 	pthread_mutex_destroy(philo[i].on_print);
 	pthread_mutex_destroy(philo[i].mstop);
 	free(philo[i].on_print);
