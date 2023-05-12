@@ -54,6 +54,9 @@ int			check_args(int argc, char **argv);
 
 //Create_threads
 void		create_threads(t_philo *philo, t_data *info);
+//Forks
+void		taken_fork(t_philo *philo, int fork_num);
+void		return_forks(t_philo *philo);
 
 //Print Actions
 void		print_action(t_philo *philo, char *action);

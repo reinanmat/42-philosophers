@@ -6,6 +6,7 @@ OBJS_PATH = ./objs/
 FILES = main \
 		check_args \
 		create_threads \
+		forks \
 		print_action \
 		routine \
 		get_time \
