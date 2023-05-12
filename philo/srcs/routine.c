@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:18:56 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/12 14:49:26 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:27:43 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,41 +65,9 @@ static void	exec_action(t_philo *philo, char *action)
 		print_action(philo, action);
 }
 
-static void	taken_fork(t_philo *philo, int fork_num)
-{
-	if (fork_num == 1)
-	{
-		if ((philo->id & 1) == 0)
-			pthread_mutex_lock(&philo->fork);
-		else
-			pthread_mutex_lock(philo->fork_left);
-	}
-	else
-	{
-		if ((philo->id & 1) == 0)
-			pthread_mutex_lock(philo->fork_left);
-		else
-			pthread_mutex_lock(&philo->fork);
-	}
-}
-
-static void	return_forks(t_philo *philo)
-{
-	if ((philo->id & 1) == 0)
-	{
-		pthread_mutex_unlock(&philo->fork);
-		pthread_mutex_unlock(philo->fork_left);
-	}
-	else
-	{
-		pthread_mutex_unlock(philo->fork_left);
-		pthread_mutex_unlock(&philo->fork);
-	}
-}
-
 void	*routine(void *arg)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	if ((philo->id & 1) == 0)
