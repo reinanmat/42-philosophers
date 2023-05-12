@@ -44,7 +44,7 @@ typedef struct s_philo
 	time_t			last_meal;
 	pthread_t		th;
 	pthread_mutex_t	fork;
-	pthread_mutex_t *fork_left;
+	pthread_mutex_t	*fork_left;
 	pthread_mutex_t	*on_print;
 	pthread_mutex_t	*mstop;
 	t_data			*data;
