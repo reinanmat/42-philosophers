@@ -15,11 +15,15 @@
 int	get_remaining_philosophers(t_philo *philo)
 {
 	int	i;
+	int	status;
 
 	i = 0;
 	while (i < philo->data->nbr_of_philosophers)
 	{
-		if (philo->status)
+		pthread_mutex_lock(philo[i].mstop);
+		status = philo[i].status;
+		pthread_mutex_unlock(philo[i].mstop);
+		if (status)
 			return (1);
 		i++;
 	}
@@ -29,6 +33,7 @@ int	get_remaining_philosophers(t_philo *philo)
 static int	monitoring(t_philo *philo, t_data *data)
 {
 	int		i;
+	int		status;
 	time_t	current_time;
 	time_t	last_meal;
 
@@ -39,10 +44,11 @@ static int	monitoring(t_philo *philo, t_data *data)
 		while (i < data->nbr_of_philosophers)
 		{
 			current_time = get_time();	
-			pthread_mutex_lock(philo[i].on_print);
+			pthread_mutex_lock(philo[i].mstop);
 			last_meal = philo[i].last_meal;
-			pthread_mutex_unlock(philo[i].on_print);
-			if (philo[i].status && current_time - last_meal >= data->time_to_die)
+			status = philo[i].status;
+			pthread_mutex_unlock(philo[i].mstop);
+			if (status && current_time - last_meal > data->time_to_die)
 			{
 				pthread_mutex_lock(philo[i].mstop);
 				philo[i].data->to_stop = 1;
