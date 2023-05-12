@@ -12,21 +12,12 @@
 
 #include "../includes/philo.h"
 
-void	free_struct(t_philo *philo)
+void	free_struct(t_data *data, t_philo *philo)
 {
 	int	i;
 
 	i = 0;
-	if (philo->data->nbr_of_philosophers == 1)
-	{
-		pthread_mutex_destroy(philo[i].on_print);
-		pthread_mutex_destroy(philo[i].mstop);
-		free(philo[i].on_print);
-		free(philo[i].mstop);
-		free(philo);
-		return ;
-	}
-	while (i < philo->data->nbr_of_philosophers)
+	while (i < data->nbr_of_philos && data->nbr_of_philos != 1)
 	{
 		pthread_join(philo[i].th, NULL);
 		i++;
@@ -36,7 +27,12 @@ void	free_struct(t_philo *philo)
 	pthread_mutex_destroy(philo[i].mstop);
 	free(philo[i].on_print);
 	free(philo[i].mstop);
-	while (i < philo->data->nbr_of_philosophers)
+	if (philo->data->nbr_of_philos == 1)
+	{
+		free(philo);
+		return ;
+	}
+	while (i < data->nbr_of_philos && data->nbr_of_philos != 1)
 	{
 		pthread_mutex_destroy(&philo[i].fork);
 		i++;
@@ -66,7 +62,7 @@ int	only_one_philo(t_philo *philo)
 	usleep(philo->data->time_to_die * 1000);
 	print_action(philo, DIED);
 	pthread_mutex_unlock(&philo->fork);
-	free_struct(philo);
+	free_struct(philo->data, philo);
 	return (0);
 }
 
