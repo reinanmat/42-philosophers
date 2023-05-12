@@ -52,8 +52,6 @@ typedef struct s_philo
 
 int			check_args(int argc, char **argv);
 
-//Create_threads
-void		create_threads(t_philo *philo, t_data *info);
 //Init struct
 void		init_data(int argc, char **argv, t_data *data);
 t_philo		*init_philosophers(t_data *data);
