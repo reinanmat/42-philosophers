@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:30:00 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/11 16:35:09 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:28:07 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 typedef struct s_data
 {
 	time_t	time_init;
-	int		nbr_of_philosophers;
+	int		nbr_of_philos;
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
