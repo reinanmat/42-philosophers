@@ -75,8 +75,9 @@ int	main(int argc, char **argv)
 		return (1);
 	init_data(argc, argv, &data);
 	philosophers = init_philosophers(&data);
-	if (data.nbr_of_philosophers == 1)
+	if (data.nbr_of_philos == 1)
 		return (only_one_philo(philosophers));
 	create_threads(philosophers, &data);
-	free_struct(philosophers);
+	monitoring(philosophers, &data);
+	free_struct(&data, philosophers);
 }
