@@ -54,6 +54,10 @@ int			check_args(int argc, char **argv);
 
 //Create_threads
 void		create_threads(t_philo *philo, t_data *info);
+//Init struct
+void		init_data(int argc, char **argv, t_data *data);
+t_philo		*init_philosophers(t_data *data);
+
 //Forks
 void		taken_fork(t_philo *philo, int fork_num);
 void		return_forks(t_philo *philo);

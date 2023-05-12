@@ -7,6 +7,7 @@ FILES = main \
 		check_args \
 		create_threads \
 		forks \
+		init_struct \
 		print_action \
 		routine \
 		get_time \
