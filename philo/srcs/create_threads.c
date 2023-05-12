@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:45:02 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/11 18:57:22 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:50:59 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int	monitoring(t_philo *philo, t_data *data)
 	while (1)
 	{
 		i = 0;
+		usleep(500);
 		while (i < data->nbr_of_philosophers)
 		{
 			current_time = get_time();	
