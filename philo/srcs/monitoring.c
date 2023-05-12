@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:45:02 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/12 17:30:32 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/12 19:35:23 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,29 @@ static int	get_remaining_philosophers(t_philo *philo)
 	return (0);
 }
 
-int	monitoring(t_philo *philo, t_data *data)
+void	monitoring(t_philo *philo, t_data *data)
 {
 	int		i;
 	int		status;
-	time_t	current_time;
-	time_t	last_meal;
 
 	while (1)
 	{
-		i = 0;
+		i = -1;
 		usleep(500);
-		while (i < data->nbr_of_philos)
+		while (++i < data->nbr_of_philos)
 		{
-			current_time = get_time();
 			pthread_mutex_lock(philo[i].mstop);
-			last_meal = philo[i].last_meal;
 			status = philo[i].status;
-			pthread_mutex_unlock(philo[i].mstop);
-			if (status && current_time - last_meal > data->time_to_die)
+			if (status && get_time() - philo[i].last_meal > data->time_to_die)
 			{
-				pthread_mutex_lock(philo[i].mstop);
 				philo[i].data->to_stop = 1;
 				pthread_mutex_unlock(philo[i].mstop);
 				print_action(&philo[i], DIED);
-				return (1);
+				return ;
 			}
-			i++;
+			pthread_mutex_unlock(philo[i].mstop);
 		}
 		if (get_remaining_philosophers(philo) == 0)
 			break ;
 	}
-	return (0);
 }
