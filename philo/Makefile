@@ -9,6 +9,7 @@ FILES = main \
 		init_struct \
 		print_action \
 		routine \
+		monitoring \
 		get_time \
 		utils
 

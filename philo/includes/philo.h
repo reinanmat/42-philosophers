@@ -60,6 +60,9 @@ t_philo		*init_philosophers(t_data *data);
 void		taken_fork(t_philo *philo, int fork_num);
 void		return_forks(t_philo *philo);
 
+//Monitoring
+int			monitoring(t_philo *philo, t_data *data);
+
 //Print Actions
 void		print_action(t_philo *philo, char *action);
 
