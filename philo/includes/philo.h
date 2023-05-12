@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:30:00 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/12 17:28:07 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/12 19:35:39 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		taken_fork(t_philo *philo, int fork_num);
 void		return_forks(t_philo *philo);
 
 //Monitoring
-int			monitoring(t_philo *philo, t_data *data);
+void		monitoring(t_philo *philo, t_data *data);
 
 //Print Actions
 void		print_action(t_philo *philo, char *action);
