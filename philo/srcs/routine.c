@@ -6,63 +6,63 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:18:56 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/11 18:47:35 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:49:26 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static int	to_sleep(t_philo *philo)
+static void	to_sleep(t_philo *philo)
 {
 	pthread_mutex_lock(philo->mstop);
 	if (philo->data->to_stop == 1 || philo->status == 0)
 	{
+		philo->status = 0;
 		pthread_mutex_unlock(philo->mstop);
-		return (0);
+		return ;
 	}
 	pthread_mutex_unlock(philo->mstop);
 	print_action(philo, SLEEP);
 	usleep(philo->data->time_to_sleep * 1000);
-	return (1);
 }
 
-static int	to_think(t_philo *philo)
+static void	to_think(t_philo *philo)
 {
 	pthread_mutex_lock(philo->mstop);
 	if (philo->data->to_stop == 1 || philo->status == 0)
 	{
+		philo->status = 0;
 		pthread_mutex_unlock(philo->mstop);
-		return (0);
+		return ;
 	}
 	pthread_mutex_unlock(philo->mstop);
 	print_action(philo, THINK);
 	usleep(500);
-	return (1);
 }
 
-static int	exec_action(t_philo *philo, char *action)
+static void	exec_action(t_philo *philo, char *action)
 {
 	pthread_mutex_lock(philo->mstop);
 	if (philo->data->to_stop == 1)
 	{
+		philo->status = 0;
 		pthread_mutex_unlock(philo->mstop);
-		return (0);
+		return ;
 	}
 	pthread_mutex_unlock(philo->mstop);
 	if (!ft_strcmp(EAT, action))
 	{
 		print_action(philo, action);
 		usleep(philo->data->time_to_eat * 1000);
-		pthread_mutex_lock(philo->on_print);
+		pthread_mutex_lock(philo->mstop);
 		philo->last_meal = get_time();
-		pthread_mutex_unlock(philo->on_print);
 		philo->meals++;
 		if (philo->meals == philo->data->meal_numbers)
-			return (0);
+			philo->status = 0;
+		pthread_mutex_unlock(philo->mstop);
 	}
 	else
 		print_action(philo, action);
-	return (1);
 }
 
 static void	taken_fork(t_philo *philo, int fork_num)
@@ -107,13 +107,13 @@ void	*routine(void *arg)
 	while (philo->status)
 	{
 		taken_fork(philo, 1);
-		philo->status = exec_action(philo, TAKEN_FORK);
+		exec_action(philo, TAKEN_FORK);
 		taken_fork(philo, 2);
-		philo->status = exec_action(philo, TAKEN_FORK);
-		philo->status = exec_action(philo, EAT);
+		exec_action(philo, TAKEN_FORK);
+		exec_action(philo, EAT);
 		return_forks(philo);
-		philo->status = to_sleep(philo);
-		philo->status = to_think(philo);
+		to_sleep(philo);
+		to_think(philo);
 	}
 	return (NULL);
 }
