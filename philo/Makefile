@@ -5,7 +5,6 @@ OBJS_PATH = ./objs/
 
 FILES = main \
 		check_args \
-		create_threads \
 		forks \
 		init_struct \
 		print_action \

@@ -44,6 +44,21 @@ void	free_struct(t_philo *philo)
 	free(philo);
 }
 
+void	create_threads(t_philo *philo, t_data *data)
+{
+	int		i;
+	time_t	time;
+
+	i = 0;
+	time = get_time();
+	while (i < data->nbr_of_philos)
+	{
+		philo[i].last_meal = time;
+		pthread_create(&philo[i].th, NULL, &routine, (void *)&philo[i]);
+		i++;
+	}
+}
+
 int	only_one_philo(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->fork);
