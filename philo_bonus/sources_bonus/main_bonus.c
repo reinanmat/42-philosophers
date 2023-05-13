@@ -21,6 +21,47 @@ void	free_struct(t_philo *philo)
 	free(philo);
 }
 
+void	in_child(t_philo *philo)
+{
+	pthread_t	th;
+
+	philo->last_meal = get_time();
+	pthread_create(&th, NULL, &routine, (void *)philo);
+	while (1)
+	{
+		usleep(500);
+		if (get_time() - philo->last_meal > philo->data->time_to_die)
+		{
+			philo->status = 0;
+			break ;
+		}
+	}
+	pthread_join(th, NULL);
+	free_struct(philo);
+	exit(1);
+}
+
+void	create_child_processes(t_philo *philo)
+{
+	int	i;
+	int	pid;
+
+	i = 0;
+	while (i < philo->data->nbr_of_philos)
+	{
+		pid = fork();
+		if (pid == 0)
+			in_child(&philo[i]);
+		i++;
+	}
+	i = 0;
+	while (i < philo->data->nbr_of_philos)
+	{
+		waitpid(-1, NULL, 0);
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	if (check_args(argc, argv))
