@@ -38,16 +38,25 @@ t_table	*init_table(int nbr_of_philos)
 t_philo	*init_philosophers(t_data *data)
 {
 	int				i;
+	sem_t			*on_print;
 	t_philo			*philo;
+	t_table			*table;
 
-	philo = malloc(sizeof(t_philo));
+	table = init_table(data->nbr_of_philos);
+	philo = malloc(sizeof(t_philo) * data->nbr_of_philos);
+	sem_unlink(PRINT);
+	on_print = sem_open(PRINT, O_CREAT, 0777, 1);
 	i = -1;
 	while (++i < data->nbr_of_philos)
 	{
 		philo[i].id = i + 1;
-		philo[i].data = data;
 		philo[i].meals = 0;
 		philo[i].status = 1;
+		philo[i].on_print = on_print;
+		philo[i].fork_left = table->forks_in_table;
+		philo[i].fork_right = table->forks_in_table;
+		philo[i].data = data;
+		philo[i].table = table;
 	}
 	return (philo);
 }
