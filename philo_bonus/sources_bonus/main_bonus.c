@@ -21,6 +21,40 @@ void	free_struct(t_philo *philo)
 	free(philo);
 }
 
+void	print_action(t_philo *philo, char *action)
+{
+	sem_wait(philo->on_print);
+	printf("%ld	%d %s\n", get_timestamp(philo), philo->id, action);
+	sem_post(philo->on_print);
+}
+
+void	*routine(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	if ((philo->id & 1) == 0)
+		usleep(500);
+	while (philo->status)
+	{
+		sem_wait(philo->fork_left);
+		print_action(philo, TAKEN_FORK);
+		sem_wait(philo->fork_right);
+		print_action(philo, TAKEN_FORK);
+		print_action(philo, EAT);
+		usleep(philo->data->time_to_eat * 1000);
+		philo->last_meal = get_time();
+		philo->meals++;
+		sem_post(philo->fork_left);
+		sem_post(philo->fork_right);
+		print_action(philo, SLEEP);
+		usleep(philo->data->time_to_sleep * 1000);
+		print_action(philo, THINK);
+		usleep(500);
+	}
+	return (NULL);
+}
+
 void	in_child(t_philo *philo)
 {
 	pthread_t	th;
