@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:52:47 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/13 13:07:16 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:03:20 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,16 @@ void	init_data(int argc, char **argv, t_data *data)
 		data->meal_numbers = (int)ft_atoill(argv[5]);
 	else
 		data->meal_numbers = -1;
+}
+
+t_table	*init_table(int nbr_of_philos)
+{
+	t_table	*table;
+
+	table = malloc(sizeof(t_table));
+	sem_unlink(FORKS);
+	table->forks_in_table = sem_open(FORKS, O_CREAT, 0777, nbr_of_philos);
+	return (table);
 }
 
 t_philo	*init_philosophers(t_data *data)
