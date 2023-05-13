@@ -98,7 +98,14 @@ void	create_child_processes(t_philo *philo)
 
 int	main(int argc, char **argv)
 {
-	if (check_args(argc, argv))
+	t_philo *philosophers;
+	t_data	data;
+
+	if (!check_args(argc, argv))
 		return (1);
+	init_data(argc, argv, &data);
+	philosophers = init_philosophers(&data);
+	create_child_processes(philosophers);
+	free_struct(philosophers);
 	return (0);
 }
