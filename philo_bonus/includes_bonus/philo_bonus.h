@@ -31,7 +31,8 @@
 # include <sys/time.h>
 # include <sys/wait.h>
 
-typedef struct s_data {
+typedef struct s_data
+{
 	time_t	time_init;
 	int		nbr_of_philos;
 	int		time_to_die;
@@ -39,6 +40,11 @@ typedef struct s_data {
 	int		time_to_sleep;
 	int		meal_numbers;
 }	t_data;
+
+typedef struct s_table
+{
+	sem_t	*forks_in_table;
+}	t_table;
 
 typedef struct s_philo
 {
