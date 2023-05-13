@@ -52,7 +52,11 @@ typedef struct s_philo
 	int				status;
 	int				meals;
 	time_t			last_meal;
+	sem_t			*fork_left;
+	sem_t			*fork_right;
+	sem_t			*on_print;
 	t_data			*data;
+	t_table			*table;
 }	t_philo;
 
 //check_args_bonus
