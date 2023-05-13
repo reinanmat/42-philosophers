@@ -6,19 +6,30 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:42:13 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/13 13:03:58 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:59:47 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
 
+# define TAKEN_FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define DIED "died"
+
+# define FORKS "/forks"
+# define PRINT "/print"
+
 # include <unistd.h>
+# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <semaphore.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <sys/wait.h>
 
 typedef struct s_data {
 	time_t	time_init;
