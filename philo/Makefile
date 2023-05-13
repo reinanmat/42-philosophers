@@ -1,7 +1,7 @@
 NAME = philo
 
-SRCS_PATH = ./srcs/
-OBJS_PATH = ./objs/
+SRCS_PATH = ./sources/
+OBJS_PATH = ./objects/
 
 FILES = main \
 		check_args \
