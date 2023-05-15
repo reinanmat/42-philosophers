@@ -117,18 +117,20 @@ void	wait_for_childs_processes(int *pid, t_philo *philo)
 void	create_child_processes(t_philo *philo)
 {
 	int	i;
-	int	pid;
+	int	*pid;
 
 	i = 0;
+	pid = malloc(sizeof(int) * philo->data->nbr_of_philos);
 	while (i < philo->data->nbr_of_philos)
 	{
-		pid = fork();
-		if (pid == 0)
-			in_child(&philo[i]);
+		pid[i] = fork();
+		if (pid[i] == 0)
+			routine(&philo[i]);
 		i++;
 	}
-	i = 0;
-	while (i < philo->data->nbr_of_philos)
+	wait_for_childs_processes(pid, philo);
+	free(pid);
+}
 
 int	only_one_philo(t_philo *philo)
 {
