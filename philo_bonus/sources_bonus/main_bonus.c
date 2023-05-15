@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:41:16 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/15 15:57:20 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/15 17:06:23 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@ void	free_struct(t_philo *philo)
 	sem_close(philo->forks_in_table);
 	sem_close(philo->on_print);
 	free(philo);
-}
-
-void	print_action(t_philo *philo, char *action)
-{
-	sem_wait(philo->on_print);
-	printf("%ld	%d %s\n", get_timestamp(philo), philo->id, action);
-	sem_post(philo->on_print);
 }
 
 void	wait_for_time(time_t time, t_philo *philo)
