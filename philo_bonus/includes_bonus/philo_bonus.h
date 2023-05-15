@@ -43,14 +43,13 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	int	id;
+	int				id;
 	int				status;
 	int				meals;
 	time_t			last_meal;
 	sem_t			*forks_in_table;
 	sem_t			*on_print;
 	t_data			*data;
-	t_table			*table;
 }	t_philo;
 
 //check_args_bonus
