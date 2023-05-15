@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:42:13 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/15 13:45:43 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:59:15 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int			check_args(int argc, char **argv);
 //init_struct
 void		init_data(int argc, char **argv, t_data *data);
 t_philo		*init_philosophers(t_data *data);
+
+void		free_struct(t_philo *philo);
 
 //get_time
 time_t		get_time(void);
