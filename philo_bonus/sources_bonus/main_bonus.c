@@ -33,26 +33,51 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+
+void	to_eat(t_philo *philo)
+{
+	sem_wait(philo->forks_in_table);
+	print_action(philo, TAKEN_FORK);
+	sem_wait(philo->forks_in_table);
+	print_action(philo, TAKEN_FORK);
+	print_action(philo, EAT);
+	usleep(philo->data->time_to_eat * 1000);
+	philo->last_meal = get_time();
+	sem_post(philo->forks_in_table);
+	sem_post(philo->forks_in_table);
+	philo->meals++;
+	if (philo->meals == philo->data->meal_numbers)
+	{
+		free_struct(philo);
+		exit(1);
+	}
+}
+
+void	to_sleep(t_philo *philo)
+{
+	print_action(philo, SLEEP);
+	wait_for_time(philo->data->time_to_sleep, philo);
+}
+
+void	to_think(t_philo *philo)
+{
+	print_action(philo, THINK);
+	usleep(500);
+	while (*(int *)philo->forks_in_table < 1)
+		wait_for_time(1000, philo);
+}
+
+void	routine(t_philo *philo)
+{
+	philo->last_meal = get_time();
 	if ((philo->id & 1) == 0)
-		usleep(500);
+		wait_for_time(philo->data->time_to_eat / 2, philo);
 	while (philo->status)
 	{
-		sem_wait(philo->fork_left);
-		print_action(philo, TAKEN_FORK);
-		sem_wait(philo->fork_right);
-		print_action(philo, TAKEN_FORK);
-		print_action(philo, EAT);
-		usleep(philo->data->time_to_eat * 1000);
-		philo->last_meal = get_time();
-		philo->meals++;
-		sem_post(philo->fork_left);
-		sem_post(philo->fork_right);
-		print_action(philo, SLEEP);
-		usleep(philo->data->time_to_sleep * 1000);
-		print_action(philo, THINK);
-		usleep(500);
+		to_eat(philo);
+		to_sleep(philo);
+		to_think(philo);
 	}
-	return (NULL);
 }
 
 void	in_child(t_philo *philo)
