@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:41:16 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/13 18:23:57 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:57:20 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	free_struct(t_philo *philo)
 {
 	sem_unlink(FORKS);
 	sem_unlink(PRINT);
-	sem_close(philo->table->forks_in_table);
-	free(philo->table);
+	sem_close(philo->forks_in_table);
+	sem_close(philo->on_print);
 	free(philo);
 }
 
