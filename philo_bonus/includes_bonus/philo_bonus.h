@@ -67,6 +67,9 @@ void		create_child_processes(t_philo *philo);
 time_t		get_time(void);
 time_t		get_timestamp(t_philo *philo);
 
+//Routine
+void		routine(t_philo *philo);
+
 //utils_Bonus
 int			ft_isdigit(char c);
 int			ft_isspace(char c);
