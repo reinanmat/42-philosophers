@@ -61,6 +61,8 @@ t_philo		*init_philosophers(t_data *data);
 
 void		free_struct(t_philo *philo);
 
+void		create_child_processes(t_philo *philo);
+
 //get_time
 time_t		get_time(void);
 time_t		get_timestamp(t_philo *philo);

@@ -5,6 +5,7 @@ OBJS_PATH_BONUS = ./objects_bonus/
 
 FILES_BONUS = main_bonus \
 			  get_time_bonus \
+			  child_processes_bonus \
 			  init_struct_bonus \
 			  check_args_bonus \
 			  utils_bonus
