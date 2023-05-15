@@ -28,11 +28,22 @@ void	print_action(t_philo *philo, char *action)
 	sem_post(philo->on_print);
 }
 
-void	*routine(void *arg)
+void	wait_for_time(time_t time, t_philo *philo)
 {
-	t_philo	*philo;
+	time_t init_time;
 
-	philo = (t_philo *)arg;
+	init_time = get_time();
+	while (get_time() - init_time <= time)
+	{
+		if (get_time() - philo->last_meal > philo->data->time_to_die)
+		{
+			print_action(philo, DIED);
+			free_struct(philo);
+			exit(1);
+		}
+		usleep(100);
+	}
+}
 
 void	to_eat(t_philo *philo)
 {
