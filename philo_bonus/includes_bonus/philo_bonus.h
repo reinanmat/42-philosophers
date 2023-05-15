@@ -70,6 +70,9 @@ time_t		get_timestamp(t_philo *philo);
 //Routine
 void		routine(t_philo *philo);
 
+//print_action
+void		print_action(t_philo *philo, char *action);
+
 //utils_Bonus
 int			ft_isdigit(char c);
 int			ft_isspace(char c);
