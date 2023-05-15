@@ -21,47 +21,6 @@ void	free_struct(t_philo *philo)
 	free(philo);
 }
 
-void	wait_for_childs_processes(int *pid, t_philo *philo)
-{
-	int	i;
-	int	status;
-
-	i = 0;
-	status = 0;
-	while (i < philo->data->nbr_of_philos && WEXITSTATUS(status) == 0)
-	{
-		waitpid(pid[i], &status, 0);
-		i++;
-	}
-	if (status)
-	{
-		i = 0;
-		while (i < philo->data->nbr_of_philos)
-		{
-			kill(pid[i], SIGKILL);
-			i++;
-		}
-	}
-}
-
-void	create_child_processes(t_philo *philo)
-{
-	int	i;
-	int	*pid;
-
-	i = 0;
-	pid = malloc(sizeof(int) * philo->data->nbr_of_philos);
-	while (i < philo->data->nbr_of_philos)
-	{
-		pid[i] = fork();
-		if (pid[i] == 0)
-			routine(&philo[i]);
-		i++;
-	}
-	wait_for_childs_processes(pid, philo);
-	free(pid);
-}
-
 int	only_one_philo(t_philo *philo)
 {
 	int	pid;
