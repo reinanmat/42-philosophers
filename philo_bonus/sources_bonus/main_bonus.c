@@ -91,10 +91,25 @@ void	routine(t_philo *philo)
 	}
 }
 
+void	wait_for_childs_processes(int *pid, t_philo *philo)
 {
+	int	i;
+	int	status;
 
+	i = 0;
+	status = 0;
+	while (i < philo->data->nbr_of_philos && WEXITSTATUS(status) == 0)
 	{
+		waitpid(pid[i], &status, 0);
+		i++;
+	}
+	if (status)
+	{
+		i = 0;
+		while (i < philo->data->nbr_of_philos)
 		{
+			kill(pid[i], SIGKILL);
+			i++;
 		}
 	}
 }
