@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:42:13 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/13 17:59:47 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/15 13:45:43 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,13 @@ typedef struct s_data
 	int		meal_numbers;
 }	t_data;
 
-typedef struct s_table
-{
-	sem_t	*forks_in_table;
-}	t_table;
-
 typedef struct s_philo
 {
 	int	id;
 	int				status;
 	int				meals;
 	time_t			last_meal;
-	sem_t			*fork_left;
-	sem_t			*fork_right;
+	sem_t			*forks_in_table;
 	sem_t			*on_print;
 	t_data			*data;
 	t_table			*table;
