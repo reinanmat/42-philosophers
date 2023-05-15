@@ -90,21 +90,38 @@ void	create_child_processes(t_philo *philo)
 	}
 	i = 0;
 	while (i < philo->data->nbr_of_philos)
+
+int	only_one_philo(t_philo *philo)
+{
+	int	pid;
+
+	pid = fork();
+	if (pid == 0)
 	{
-		waitpid(-1, NULL, 0);
-		i++;
+		sem_post(philo->forks_in_table);
+		print_action(philo, TAKEN_FORK);
+		usleep(philo->data->time_to_die * 1000);
+		print_action(philo, DIED);
+		sem_wait(philo->forks_in_table);
+		free_struct(philo);
+		exit(0);
 	}
+	waitpid(pid, NULL, 0);
+	free_struct(philo);
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	t_philo *philosophers;
 	t_data	data;
+	t_philo *philosophers;
 
 	if (!check_args(argc, argv))
 		return (1);
 	init_data(argc, argv, &data);
 	philosophers = init_philosophers(&data);
+	if (data.nbr_of_philos == 1)
+		return(only_one_philo(philosophers));
 	create_child_processes(philosophers);
 	free_struct(philosophers);
 	return (0);
