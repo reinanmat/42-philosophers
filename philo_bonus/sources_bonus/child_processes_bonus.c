@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child_processes.c                                  :+:      :+:    :+:   */
+/*   child_processes_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:56:19 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/15 16:58:53 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:38:47 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	wait_for_childs_processes(int *pid, t_philo *philo)
 		waitpid(pid[i], &status, 0);
 		i++;
 	}
-	if (status)
+	if (WEXITSTATUS(status) == 1)
 	{
 		i = 0;
 		while (i < philo->data->nbr_of_philos)

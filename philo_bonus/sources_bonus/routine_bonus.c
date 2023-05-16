@@ -12,21 +12,28 @@
 
 #include "../includes_bonus/philo_bonus.h"
 
-static void	wait_for_time(time_t time, t_philo *philo)
+static void	exec_action(time_t time_to_action, t_philo *philo, char *action)
 {
-	time_t init_time;
+	time_t	current_time;
+	time_t	death_time;
+	time_t	time_to_exec_action;
 
-	init_time = get_time();
-	while (get_time() - init_time <= time)
+	current_time = get_time();
+	death_time = philo->last_meal + philo->data->time_to_die;
+	time_to_exec_action = current_time + time_to_action;
+	print_action(philo, action);
+	if (time_to_exec_action > death_time)
 	{
-		if (get_time() - philo->last_meal > philo->data->time_to_die)
-		{
-			print_action(philo, DIED);
-			free_struct(philo);
-			exit(1);
-		}
-		usleep(100);
+		usleep((death_time - current_time) * 1000);
+		sem_wait(philo->on_print);
+		printf("%ld	%d %s\n", get_timestamp(philo), philo->id, DIED);
+		sem_post(philo->on_print);
+		sem_post(philo->forks_in_table);
+		sem_post(philo->forks_in_table);
+		free_struct(philo);
+		exit(1);
 	}
+	usleep(time_to_action * 1000);
 }
 
 static void	to_eat(t_philo *philo)
