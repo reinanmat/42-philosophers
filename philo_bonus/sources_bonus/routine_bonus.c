@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:38:28 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/15 17:22:34 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/16 18:47:36 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,31 +47,19 @@ static void	to_eat(t_philo *philo)
 		exit(1);
 	}
 }
-
-static void	to_sleep(t_philo *philo)
-{
-	print_action(philo, SLEEP);
-	wait_for_time(philo->data->time_to_sleep, philo);
-}
-
-static void	to_think(t_philo *philo)
-{
-	print_action(philo, THINK);
-	usleep(500);
-	while (*(int *)philo->forks_in_table < 1)
-		wait_for_time(1000, philo);
 }
 
 void	routine(t_philo *philo)
 {
 	philo->last_meal = get_time();
 	if ((philo->id & 1) == 0)
-		wait_for_time(philo->data->time_to_eat / 2, philo);
-	while (philo->status)
+		usleep(700);
+	while (1)
 	{
 		to_eat(philo);
-		to_sleep(philo);
-		to_think(philo);
+		exec_action(philo->data->time_to_sleep, philo, SLEEP); 
+		print_action(philo, THINK);
+		usleep(300);
 	}
+	exit(1);
 }
-
