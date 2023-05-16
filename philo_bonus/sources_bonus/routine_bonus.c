@@ -39,21 +39,21 @@ static void	exec_action(time_t time_to_action, t_philo *philo, char *action)
 static void	to_eat(t_philo *philo)
 {
 	sem_wait(philo->forks_in_table);
-	print_action(philo, TAKEN_FORK);
 	sem_wait(philo->forks_in_table);
 	print_action(philo, TAKEN_FORK);
-	print_action(philo, EAT);
-	usleep(philo->data->time_to_eat * 1000);
+	print_action(philo, TAKEN_FORK);
+	exec_action(philo->data->time_to_eat, philo, EAT);
 	philo->last_meal = get_time();
-	sem_post(philo->forks_in_table);
-	sem_post(philo->forks_in_table);
 	philo->meals++;
 	if (philo->meals == philo->data->meal_numbers)
 	{
+		sem_post(philo->forks_in_table);
+		sem_post(philo->forks_in_table);
 		free_struct(philo);
-		exit(1);
+		exit(0);
 	}
-}
+	sem_post(philo->forks_in_table);
+	sem_post(philo->forks_in_table);
 }
 
 void	routine(t_philo *philo)
