@@ -6,14 +6,45 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:52:47 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/15 14:34:57 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:16:00 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/philo_bonus.h"
 
-void	init_data(int argc, char **argv, t_data *data)
+static t_philo	*init_philos(int nbr_of_philos)
 {
+	int				i;
+	sem_t			*on_exec;
+	sem_t			*on_print;
+	sem_t			*forks;
+	t_philo			*philo;
+
+	philo = malloc(sizeof(t_philo) * nbr_of_philos);
+	sem_unlink(PRINT);
+	on_print = sem_open(PRINT, O_CREAT, 0777, 1);
+	sem_unlink(EXEC);
+	on_exec = sem_open(EXEC, O_CREAT, 0777, 1);
+	sem_unlink(FORKS);
+	forks = sem_open(FORKS, O_CREAT, 0777, nbr_of_philos);
+	i = -1;
+	while (++i < nbr_of_philos)
+	{
+		philo[i].id = i + 1;
+		philo[i].meals = 0;
+		philo[i].status = 1;
+		philo[i].on_print = on_print;
+		philo[i].on_exec = on_exec;
+		philo[i].forks_in_table = forks;
+	}
+	return (philo);
+}
+
+t_data	*init_data(int argc, char **argv)
+{
+	t_data	*data;
+
+	data = (t_data *)malloc(sizeof(t_data));
 	data->time_init = get_time();
 	data->nbr_of_philos = (int)ft_atoill(argv[1]);
 	data->time_to_die = (int)ft_atoill(argv[2]);
@@ -23,29 +54,6 @@ void	init_data(int argc, char **argv, t_data *data)
 		data->meal_numbers = (int)ft_atoill(argv[5]);
 	else
 		data->meal_numbers = -1;
-}
-
-t_philo	*init_philosophers(t_data *data)
-{
-	int				i;
-	sem_t			*on_print;
-	sem_t			*forks;
-	t_philo			*philo;
-
-	philo = malloc(sizeof(t_philo) * data->nbr_of_philos);
-	sem_unlink(PRINT);
-	on_print = sem_open(PRINT, O_CREAT, 0777, 1);
-	sem_unlink(FORKS);
-	forks = sem_open(FORKS, O_CREAT, 0777, data->nbr_of_philos);
-	i = -1;
-	while (++i < data->nbr_of_philos)
-	{
-		philo[i].id = i + 1;
-		philo[i].data = data;
-		philo[i].meals = 0;
-		philo[i].status = 1;
-		philo[i].on_print = on_print;
-		philo[i].forks_in_table = forks;
-	}
-	return (philo);
+	data->philos = init_philos(data->nbr_of_philos);
+	return (data);
 }

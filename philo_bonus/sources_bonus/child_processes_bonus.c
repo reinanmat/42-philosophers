@@ -6,13 +6,13 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:56:19 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/17 12:17:16 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/17 13:41:44 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/philo_bonus.h"
 
-static void	wait_for_childs_processes(int *pid_array, t_philo *philo)
+static void	wait_for_childs_processes(int *pid_array, t_data *data)
 {
 	int	i;
 	int	pid;
@@ -20,7 +20,7 @@ static void	wait_for_childs_processes(int *pid_array, t_philo *philo)
 
 	i = 0;
 	status = 0;
-	while (i < philo->data->nbr_of_philos)
+	while (i < data->nbr_of_philos)
 	{
 		waitpid(-1, &status, 0);
 		if (WEXITSTATUS(status) == 1)
@@ -30,7 +30,7 @@ static void	wait_for_childs_processes(int *pid_array, t_philo *philo)
 	if (WEXITSTATUS(status) == 1)
 	{
 		i = 0;
-		while (i < philo->data->nbr_of_philos)
+		while (i < data->nbr_of_philos)
 		{
 			pid = pid_array[i];
 			kill(pid, SIGKILL);
@@ -39,20 +39,23 @@ static void	wait_for_childs_processes(int *pid_array, t_philo *philo)
 	}
 }
 
-void	create_child_processes(t_philo *philo)
+void	create_child_processes(t_data *data)
 {
 	int	i;
 	int	*pid;
 
 	i = 0;
-	pid = malloc(sizeof(int) * philo->data->nbr_of_philos);
-	while (i < philo->data->nbr_of_philos)
+	pid = (int *)malloc(sizeof(int) * data->nbr_of_philos);
+	while (i < data->nbr_of_philos)
 	{
 		pid[i] = fork();
 		if (pid[i] == 0)
-			routine(&philo[i]);
+		{
+			free(pid);
+			routine(data, &data->philos[i]);
+		}
 		i++;
 	}
-	wait_for_childs_processes(pid, philo);
+	wait_for_childs_processes(pid, data);
 	free(pid);
 }

@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:42:13 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/15 16:59:15 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:02:10 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,28 @@
 # include <sys/time.h>
 # include <sys/wait.h>
 
-typedef struct s_data
-{
-	time_t	time_init;
-	int		nbr_of_philos;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		meal_numbers;
-}	t_data;
-
 typedef struct s_philo
 {
-	int				id;
-	int				status;
-	int				meals;
-	time_t			last_meal;
-	sem_t			*forks_in_table;
-	sem_t			*on_print;
-	t_data			*data;
+	int		id;
+	int		status;
+	int		meals;
+	time_t	last_meal;
+	sem_t	*forks_in_table;
+	sem_t	*on_print;
+	sem_t	*on_exec;
 }	t_philo;
+
+typedef struct s_data
+{
+	int		nbr_of_philos;
+	time_t	time_to_die;
+	time_t	time_to_eat;
+	time_t	time_to_sleep;
+	time_t	meal_numbers;
+	time_t	time_init;
+	t_philo	*philos;
+}	t_data;
+
 
 //check_args_bonus
 int			check_args(int argc, char **argv);

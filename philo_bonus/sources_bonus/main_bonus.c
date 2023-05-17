@@ -6,53 +6,54 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:41:16 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/15 18:24:47 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:02:52 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/philo_bonus.h"
 
-void	free_struct(t_philo *philo)
+void	free_struct(t_data *data)
 {
 	sem_unlink(FORKS);
 	sem_unlink(PRINT);
-	sem_close(philo->forks_in_table);
-	sem_close(philo->on_print);
-	/* free(philo); */
+	sem_unlink(EXEC);
+	sem_close(data->philos->forks_in_table);
+	sem_close(data->philos->on_print);
+	sem_close(data->philos->on_exec);
+	free(data->philos);
+	free(data);
 }
 
-int	only_one_philo(t_philo *philo)
+int	only_one_philo(t_data *data)
 {
 	int	pid;
 
 	pid = fork();
 	if (pid == 0)
 	{
-		sem_post(philo->forks_in_table);
-		print_action(philo, TAKEN_FORK);
-		usleep(philo->data->time_to_die * 1000);
-		print_action(philo, DIED);
-		sem_wait(philo->forks_in_table);
-		free_struct(philo);
+		sem_post(data->philos->forks_in_table);
+		print_action(data, data->philos, TAKEN_FORK);
+		usleep(data->time_to_die * 1000);
+		print_action(data, data->philos, DIED);
+		sem_wait(data->philos->forks_in_table);
+		free_struct(data);
 		exit(0);
 	}
 	waitpid(pid, NULL, 0);
-	free_struct(philo);
+	free_struct(data);
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
-	t_philo *philosophers;
+	t_data	*data;
 
 	if (!check_args(argc, argv))
 		return (1);
-	init_data(argc, argv, &data);
-	philosophers = init_philosophers(&data);
-	if (data.nbr_of_philos == 1)
-		return(only_one_philo(philosophers));
-	create_child_processes(philosophers);
-	free_struct(philosophers);
+	data = init_data(argc, argv);
+	if (data->nbr_of_philos == 1)
+		return(only_one_philo(data));
+	create_child_processes(data);
+	free_struct(data);
 	return (0);
 }
