@@ -6,22 +6,25 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:56:19 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/16 17:38:47 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:17:16 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/philo_bonus.h"
 
-static void	wait_for_childs_processes(int *pid, t_philo *philo)
+static void	wait_for_childs_processes(int *pid_array, t_philo *philo)
 {
 	int	i;
+	int	pid;
 	int	status;
 
 	i = 0;
 	status = 0;
-	while (i < philo->data->nbr_of_philos && WEXITSTATUS(status) == 0)
+	while (i < philo->data->nbr_of_philos)
 	{
-		waitpid(pid[i], &status, 0);
+		waitpid(-1, &status, 0);
+		if (WEXITSTATUS(status) == 1)
+			break ;
 		i++;
 	}
 	if (WEXITSTATUS(status) == 1)
@@ -29,7 +32,8 @@ static void	wait_for_childs_processes(int *pid, t_philo *philo)
 		i = 0;
 		while (i < philo->data->nbr_of_philos)
 		{
-			kill(pid[i], SIGKILL);
+			pid = pid_array[i];
+			kill(pid, SIGKILL);
 			i++;
 		}
 	}
