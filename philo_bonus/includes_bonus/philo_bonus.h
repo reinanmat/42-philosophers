@@ -58,22 +58,23 @@ typedef struct s_data
 int			check_args(int argc, char **argv);
 
 //init_struct
-void		init_data(int argc, char **argv, t_data *data);
-t_philo		*init_philosophers(t_data *data);
+t_data		*init_data(int argc, char **argv);
 
-void		free_struct(t_philo *philo);
+void		free_struct(t_data *data);
 
-void		create_child_processes(t_philo *philo);
+void		create_child_processes(t_data *data);
 
 //get_time
 time_t		get_time(void);
-time_t		get_timestamp(t_philo *philo);
+time_t		get_timestamp(time_t time_init);
 
 //Routine
-void		routine(t_philo *philo);
+void		taken_forks(t_philo *philo);
+void		give_back_forks(t_philo *philo);
+void		routine(t_data *data, t_philo *philo);
 
 //print_action
-void		print_action(t_philo *philo, char *action);
+void		print_action(t_data *data, t_philo *philo, char *action);
 
 //utils_Bonus
 int			ft_isdigit(char c);
