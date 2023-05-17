@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:38:28 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/17 14:51:15 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:30:12 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	to_eat(t_data *data, t_philo *philo)
 	philo->meals++;
 	if (philo->meals == data->meal_numbers)
 	{
-		taken_forks(philo);
+		give_back_forks(philo);
 		free_struct(data);
 		exit(0);
 	}
