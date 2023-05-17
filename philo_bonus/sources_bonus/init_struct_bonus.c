@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:52:47 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/17 14:49:14 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:56:39 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static t_philo	*init_philos(int nbr_of_philos)
 	{
 		philo[i].id = i + 1;
 		philo[i].meals = 0;
-		philo[i].status = 1;
 		philo[i].on_print = on_print;
 		philo[i].forks_in_table = forks;
 	}

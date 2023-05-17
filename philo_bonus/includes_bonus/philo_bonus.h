@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:42:13 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/17 14:02:10 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:56:28 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 typedef struct s_philo
 {
 	int		id;
-	int		status;
 	int		meals;
 	time_t	last_meal;
 	sem_t	*forks_in_table;
