@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:41:16 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/17 16:41:24 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:43:47 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 		return (1);
 	data = init_data(argc, argv);
 	if (data->nbr_of_philos == 1)
-		return(only_one_philo(data));
+		return (only_one_philo(data));
 	create_child_processes(data);
 	free_struct(data);
 	return (0);

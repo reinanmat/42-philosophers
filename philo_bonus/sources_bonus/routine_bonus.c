@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:38:28 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/17 16:30:12 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:44:46 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ static void	to_eat(t_data *data, t_philo *philo)
 static void	to_sleep(t_data *data, t_philo *philo)
 {
 	print_action(data, philo, SLEEP);
-	exec_action(data->time_to_sleep, data, philo); 
+	exec_action(data->time_to_sleep, data, philo);
 }
 
-static void to_think(t_data *data, t_philo *philo)
+static void	to_think(t_data *data, t_philo *philo)
 {
 	print_action(data, philo, THINK);
 	usleep(500);

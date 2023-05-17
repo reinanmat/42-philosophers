@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:42:13 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/17 14:56:28 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:45:01 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_data
 	time_t	time_init;
 	t_philo	*philos;
 }	t_data;
-
 
 //check_args_bonus
 int			check_args(int argc, char **argv);
