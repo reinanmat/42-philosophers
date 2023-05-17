@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:38:28 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/17 14:29:06 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:51:15 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static void	exec_action(time_t time_to_action, t_data *data, t_philo *philo)
 
 static void	to_eat(t_data *data, t_philo *philo)
 {
-	sem_wait(philo->forks_in_table);
-	sem_wait(philo->forks_in_table);
+	taken_forks(philo);
 	print_action(data, philo, TAKEN_FORK);
 	print_action(data, philo, TAKEN_FORK);
 	print_action(data, philo, EAT);
@@ -44,13 +43,11 @@ static void	to_eat(t_data *data, t_philo *philo)
 	philo->meals++;
 	if (philo->meals == data->meal_numbers)
 	{
-		sem_post(philo->forks_in_table);
-		sem_post(philo->forks_in_table);
+		taken_forks(philo);
 		free_struct(data);
 		exit(0);
 	}
-	sem_post(philo->forks_in_table);
-	sem_post(philo->forks_in_table);
+	give_back_forks(philo);
 }
 
 static void	to_sleep(t_data *data, t_philo *philo)
