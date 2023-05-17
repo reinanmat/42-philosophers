@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:52:47 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/17 14:16:00 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:49:14 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static t_philo	*init_philos(int nbr_of_philos)
 {
 	int				i;
-	sem_t			*on_exec;
 	sem_t			*on_print;
 	sem_t			*forks;
 	t_philo			*philo;
@@ -23,8 +22,6 @@ static t_philo	*init_philos(int nbr_of_philos)
 	philo = malloc(sizeof(t_philo) * nbr_of_philos);
 	sem_unlink(PRINT);
 	on_print = sem_open(PRINT, O_CREAT, 0777, 1);
-	sem_unlink(EXEC);
-	on_exec = sem_open(EXEC, O_CREAT, 0777, 1);
 	sem_unlink(FORKS);
 	forks = sem_open(FORKS, O_CREAT, 0777, nbr_of_philos);
 	i = -1;
@@ -34,7 +31,6 @@ static t_philo	*init_philos(int nbr_of_philos)
 		philo[i].meals = 0;
 		philo[i].status = 1;
 		philo[i].on_print = on_print;
-		philo[i].on_exec = on_exec;
 		philo[i].forks_in_table = forks;
 	}
 	return (philo);
