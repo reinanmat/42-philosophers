@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:49:51 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/11 14:52:51 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/18 17:18:48 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ size_t	ft_amount_of_digits(char *str)
 
 	i = 0;
 	amount = 0;
+	while (ft_isspace(str[i]) || str[i] == '0')
+		i++;
 	while (str[i])
 	{
 		if (ft_isdigit(str[i]))
