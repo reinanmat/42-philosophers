@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:42:13 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/17 16:45:01 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/18 13:28:22 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,21 @@ int			check_args(int argc, char **argv);
 //init_struct
 t_data		*init_data(int argc, char **argv);
 
+//main
 void		free_struct(t_data *data);
 
+//Child_processes
 void		create_child_processes(t_data *data);
 
 //get_time
 time_t		get_time(void);
 time_t		get_timestamp(time_t time_init);
 
-//Routine
+//Forks
 void		taken_forks(t_philo *philo);
 void		give_back_forks(t_philo *philo);
+
+//Routine
 void		routine(t_data *data, t_philo *philo);
 
 //print_action
