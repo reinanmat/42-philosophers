@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:38:28 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/17 16:44:46 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/18 14:36:42 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	exec_action(time_t time_to_action, t_data *data, t_philo *philo)
 	current_time = get_time();
 	death_time = philo->last_meal + data->time_to_die;
 	time_to_exec_action = current_time + time_to_action;
-	if (time_to_exec_action > death_time)
+	if (time_to_exec_action >= death_time)
 	{
 		usleep((death_time - current_time) * 1000);
 		sem_wait(philo->on_print);
