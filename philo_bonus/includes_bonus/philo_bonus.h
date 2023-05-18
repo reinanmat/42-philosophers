@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:42:13 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/18 13:28:22 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:10:46 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <semaphore.h>
-# include <pthread.h>
 # include <sys/time.h>
 # include <sys/wait.h>
 
