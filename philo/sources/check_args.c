@@ -6,7 +6,7 @@
 /*   By: revieira <revieira@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:14:15 by revieira          #+#    #+#             */
-/*   Updated: 2023/05/04 17:43:27 by revieira         ###   ########.fr       */
+/*   Updated: 2023/05/18 12:59:25 by revieira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	check_pos_numbers(char *number)
 		i++;
 	if (number[i] == '-')
 	{
-		printf("Error: negative number\n");
+		printf("Error: invalid number, negative number\n");
 		return (0);
 	}
 	if (number[i] == '+')
@@ -32,7 +32,7 @@ static int	check_pos_numbers(char *number)
 		i++;
 	if (number[i] != '\0')
 	{
-		printf("Error: invalid number\n");
+		printf("Error: invalid argument\n");
 		return (0);
 	}
 	return (1);
@@ -47,7 +47,7 @@ static int	check_int_max(char *str)
 	number = ft_atoill(str);
 	if (digits > 10 || number > 2147483647)
 	{
-		printf("Error: invalid number bigger then INT_MAX\n");
+		printf("Error: invalid argument, greater than int_max\n");
 		return (0);
 	}
 	return (1);
@@ -71,7 +71,7 @@ int	check_args(int argc, char **argv)
 {
 	if (argc != 5 && argc != 6)
 	{
-		printf("Error: wrong number of arguments\n");
+		printf("Error: invalid number of arguments\n");
 		return (0);
 	}
 	++argv;
@@ -84,5 +84,13 @@ int	check_args(int argc, char **argv)
 		printf("Error: invalid numbers of philoshopers\n");
 		return (0);
 	}
+	if ((int)ft_atoill(argv[1]) == 0 || (int)ft_atoill(argv[2]) == 0 || \
+		(int)ft_atoill(argv[3]) == 0)
+	{
+		printf("Error: invalid time");
+		return (0);
+	}
+	if (argc == 6 && (int)ft_atoill(argv[4]) == 0)
+		return (0);
 	return (1);
 }
